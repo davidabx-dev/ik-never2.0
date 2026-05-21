@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>iK - Consumo Sênior Multi-Mapping</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #ffffff; padding: 40px; }
+        .painel { background: #1e1e1e; border-left: 5px solid #00ffcc; padding: 25px; border-radius: 8px; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        button { background: #00ffcc; color: #121212; font-weight: bold; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; width: 100%; font-size: 16px;}
+        button:hover { background: #00ccaa; }
+        .dado { margin-bottom: 10px; font-size: 15px; }
+        .destaque { color: #00ffcc; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="painel">
+        <h2>Painel de Sustentação Legada</h2>
+        <p>Buscando Cliente + Endereço via Dapper Multi-Mapping</p>
+        
+        <button id="btnCarregarDados">Executar Chamada jQuery</button>
+        
+        <div id="resultadoContainer" style="display: none; background: #2a2a2a; padding: 15px; border-radius: 5px;">
+            <div class="dado">ID: <span id="resId" class="destaque"></span></div>
+            <div class="dado">Nome Corp: <span id="resNome" class="destaque"></span></div>
+            <div class="dado">Documento: <span id="resDoc" class="destaque"></span></div>
+            <hr style="border-color: #444; margin: 15px 0;">
+            <div class="dado">Logradouro: <span id="resLogradouro" class="destaque"></span></div>
+            <div class="dado">Cidade: <span id="resCidade" class="destaque"></span></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#btnCarregarDados').click(function() {
+                $.ajax({
+                    // AJUSTE SÊNIOR: Forçando o IP ao invés de 'localhost' para evitar conflito de DNS do Live Server
+                    url: 'http://127.0.0.1:5281/api/cliente/otimizado/1', 
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(cliente) {
+                        $('#resId').text(cliente.id);
+                        $('#resNome').text(cliente.nome);
+                        $('#resDoc').text(cliente.documento);
+                        
+                        if (cliente.enderecoDetalhado) {
+                            $('#resLogradouro').text(cliente.enderecoDetalhado.logradouro);
+                            $('#resCidade').text(cliente.enderecoDetalhado.cidade);
+                        }
+                        $('#resultadoContainer').fadeIn();
+                    },
+                    error: function(xhr) {
+                        alert("Falha de Comunicação! Status: " + xhr.status);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
