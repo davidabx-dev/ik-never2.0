@@ -4,7 +4,7 @@
   
 </div>
 
-Este projeto foi desenvolvido com o objetivo de servir como um portfólio de prova técnica para a vaga de Desenvolvedor(a).NET iK. A aplicação demonstra de forma prática como construir um ecossistema de Back-end moderno utilizando as melhores práticas de arquitetura, focando em performance extrema de acesso a dados e integração limpa com interfaces legadas.
+>**Este projeto foi desenvolvido com o objetivo de servir como um portfólio de prova técnica para a vaga de Desenvolvedor(a).NET iK. A aplicação demonstra de forma prática como construir um ecossistema de Back-end moderno utilizando as melhores práticas de arquitetura, focando em performance extrema de acesso a dados e integração limpa com interfaces legadas.**
 
 ---
 
